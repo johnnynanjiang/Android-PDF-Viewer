@@ -7,7 +7,10 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.ortiz.touch.TouchImageView;
 
 
 /**
@@ -64,7 +67,17 @@ public class PdfViewerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_pdf_viewer, container, false);
+        View view = inflater.inflate(R.layout.fragment_pdf_viewer, container, false);
+        LinearLayout pdfImageContainerView = (LinearLayout)view.findViewById(R.id.pdf_image_container);
+
+        for (int i = 0; i < 100; i++)
+        {
+            TouchImageView imageView = (TouchImageView)inflater.inflate(R.layout.pdf_image_layout, null, false);
+            imageView.setId(i);
+            pdfImageContainerView.addView(imageView);
+        }
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
