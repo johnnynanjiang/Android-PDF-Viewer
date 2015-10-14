@@ -1,17 +1,29 @@
 package au.com.sping.android.pdfviewer;
 
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements PdfViewerFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState == null) {
+            // During initial setup, plug in the details fragment.
+            PdfViewerFragment pdfViewerFragment = new PdfViewerFragment();
+            getFragmentManager()
+                    .beginTransaction()
+                        .add(R.id.main, pdfViewerFragment)
+                        .addToBackStack("PdfViewer")
+                    .commit();
+        }
     }
 
 
@@ -35,5 +47,9 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onFragmentInteraction(Uri uri) {
+        // do nothing
     }
 }
